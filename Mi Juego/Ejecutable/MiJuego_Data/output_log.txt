@@ -15,7 +15,7 @@ Platform assembly: C:\Users\Raven\Documents\Mi Juego\Ejecutable\MiJuego_Data\Man
 Loading C:\Users\Raven\Documents\Mi Juego\Ejecutable\MiJuego_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Raven\Documents\Mi Juego\Ejecutable\MiJuego_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading C:\Users\Raven\Documents\Mi Juego\Ejecutable\MiJuego_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  0.072 seconds
+- Completed reload, in  0.250 seconds
 desktop: 1024x768 60Hz; virtual: 1024x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
