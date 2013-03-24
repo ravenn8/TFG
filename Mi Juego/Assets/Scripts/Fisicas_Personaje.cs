@@ -41,6 +41,17 @@ public class Fisicas_Personaje : MonoBehaviour { // todos los scripts derivan de
 		AplicarGravedad();
 	}
 	
+	public void Reset() {
+		esta_en_el_suelo = false;
+		saltando = false;
+		saltoPulsado = false;
+		tiempo_de_salto = 0;
+		esprintar = false;
+		fuerza_de_freno = 0;
+		rigidbody.velocity = Vector3.zero;
+		transform.position = posicionInicial;
+	}
+	
     
 	public void Caminar(float direccion) // se llama cuando jugador pulsa -1.0 izquierda 1.0 derecha
 	{
@@ -169,6 +180,11 @@ public class Fisicas_Personaje : MonoBehaviour { // todos los scripts derivan de
 	{
 		personajeAltura = collider.bounds.size.y;  // cojo tamaño del limite de la y
 		personajeAnchura = collider.bounds.size.x; // cojo tamaño del limite de la x
+	}
+	
+	public void SetRespawn(Vector3 checkpoint)
+	{
+		posicionInicial = checkpoint;
 	}
 	
 }
