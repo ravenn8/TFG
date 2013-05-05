@@ -5,8 +5,8 @@ public class Plano_Muerte : MonoBehaviour
 {
 	void OnTriggerEnter(Collider other)
 	{
-		Control_Personaje control = other.gameObject.GetComponent<Control_Personaje>();
-		if (control && control.TieneControl())
+		Controles control = other.gameObject.GetComponent<Controles>();
+		if (control && control.EnControl())
 		{
 			// dejamos al personaje morir
 			StartCoroutine(Personaje_Muere(other.gameObject));
@@ -17,11 +17,11 @@ public class Plano_Muerte : MonoBehaviour
 
 	IEnumerator Personaje_Muere(GameObject jugador)
 	{
-		jugador.GetComponent<Control_Personaje>().QuitaControl();
+		jugador.GetComponent<Controles>().QuitaControl();
 
 		yield return new WaitForSeconds(0.5f);
 
-		jugador.GetComponent<Fisicas_Personaje>().Reset();
-		jugador.GetComponent<Control_Personaje>().DaControl();
+		jugador.GetComponent<Fisicas>().Reset();
+		jugador.GetComponent<Controles>().DaControl();
 	}
 }

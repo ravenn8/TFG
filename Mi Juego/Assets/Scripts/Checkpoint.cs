@@ -5,11 +5,11 @@ public class Checkpoint : MonoBehaviour
 {
 	void OnTriggerEnter(Collider other)
 	{
-		Fisicas_Personaje fisicas = other.gameObject.GetComponent<Fisicas_Personaje>();
+		Fisicas fisicas = other.gameObject.GetComponent<Fisicas>();
 		if (fisicas)
 		{
 			// coloca nuevo punto de respawn dando la posicion actual donde se ha activado este collider
-			fisicas.SetRespawn(transform.position);
+			fisicas.Checkpoint(transform.position);
 		}
 	}
 }

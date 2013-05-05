@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Fisicas_Personaje.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Plano_Muerte.cs">
     <Files>
-      <File FileName="Assets\Scripts\Checkpoint.cs" Line="11" Column="44" />
-      <File FileName="Assets\Scripts\Fisicas_Personaje.cs" Line="185" Column="18" />
+      <File FileName="Assets\Scripts\Animacion.cs" Line="154" Column="22" />
+      <File FileName="Assets\Scripts\Checkpoint.cs" Line="13" Column="4" />
+      <File FileName="Assets\Scripts\Plano_Muerte.cs" Line="18" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
