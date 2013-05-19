@@ -6,15 +6,15 @@ public class Fisicas : MonoBehaviour
 	
 	// Variables de movimiento
 	public float velocidadAndando			= 35;		// Velocidad caminando
-	public float velocidadCorriendo			= 60;		// Velocidad esprintando
+	public float velocidadCorriendo			= 70;		// Velocidad esprintando
 	public float velocidadAndandoMaxima		= 15;		// Velocidad caminando maxima
-	public float velocidadCorriendoMaxima	= 20;		// Velocidad corriendo maxima
+	public float velocidadCorriendoMaxima	= 30;		// Velocidad corriendo maxima
 	public float movimientoFriccion			= 0.9f;		// Friccion del personaje en el suelo, si el usuario no pulsa
 	public float velocidadDeParada			= 5.0f;		// Velocidad de parada
 	public float friccionDelAire			= 0.98f;	// Coeficiente de friccion en el aire
 	public float AnguloMaximoAndar			= 30.0f;	// Angulo maximo para caminar
 	public float agacharseCollider			= 0.5f;		// Transformador de collider al agacharse
-	public float aceleracionAgachado		= 0.1f;		// Velocidad maxima agachado
+	public float aceleracionAgachado		= 0.5f;		// Velocidad maxima agachado
 
 	// Variables de salto
 	public float velocidadSalto			= 12;			// Velocidad de salto
@@ -25,6 +25,12 @@ public class Fisicas : MonoBehaviour
 	public float saltoMuroVelocidad		= 15;			// Velocidad del salto en el Muro
 	public float muroNumeroEnganche		= 0.5f;			// Tiempo que se aguanta el usuario hasta empezar a bajar en un muro
 	public float multiplicadorGravedad	= 3.5f;			// Coeficiente de gravedad que se le aplica al usuario
+	
+	// Otras
+	public int vidas					= 3;			// Vidas de nuestro personaje	
+	public int fase						= 1;			// En que pantalla estamos
+	public string CfgLevelName;
+	public double tiempo				= 0.0;			// Tiempo de juego
 
 
 
@@ -48,6 +54,9 @@ public class Fisicas : MonoBehaviour
 	Vector3 fPosicionInicial;							// Posicion para resucitar
 	float colliderCentroY;								// Tamanyo de la caja de colisiones
 	float colliderTamanyoY;
+	
+	public GUIStyle estilo;
+	
 
 	public void Start () 
 	{
@@ -87,8 +96,9 @@ public class Fisicas : MonoBehaviour
 		ActualizaAgacharse();
 		AplicaGravedad();
 		AplicaFriccion();
+		Tiempo ();
 	}
-
+	
 
 	public void Andar(float direction) 
 	{
@@ -477,10 +487,35 @@ public class Fisicas : MonoBehaviour
 		return collider.bounds.center+collider.bounds.extents.y*Vector3.down;
 	}
 	
+	public void Tiempo(){
+		tiempo += Time.deltaTime;
+	}
+	
+	public void OnGUI(){
+		GUI.Label(new Rect(8,0,Screen.height,Screen.width), "Fase "+ fase , estilo);
+        GUI.Label(new Rect(8,20,Screen.height,Screen.width), "Vidas Restantes "+ vidas, estilo);
+		GUI.Label(new Rect(8,40,Screen.height,Screen.width), "Tiempo de juego "+ tiempo.ToString("f2"), estilo);
+		if(dobleSalto){
+			GUI.Label(new Rect(800,0,Screen.height,Screen.width), "Doble Salto Activado",estilo);
+		}
+	}
+	
+	
+	public void QuitaVida(){ 
+		vidas = vidas - 1;
+		if(vidas == 0){
+			vidas = 3;
+			Application.LoadLevel(this.CfgLevelName);
+		}
+	}
+	
+	
 	// funciones get
 	public bool EstaMuroCorrecto() { return fMuroCorrecto; }
 	public bool EstaAgachado() { return fAgacharse; }
 	public bool EstaEnMuro() { return fEnMuro; }
 	public bool EstaEnSuelo() { return fEnSuelo; }
 	public bool EstaEnSprint() { return fSprint; }
+	
+		
 }

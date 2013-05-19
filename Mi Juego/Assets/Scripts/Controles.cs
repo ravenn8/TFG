@@ -5,6 +5,8 @@ public class Controles : MonoBehaviour
 {
 	Fisicas fisicasPersonaje;
 	bool tieneControl;
+	bool pausa;
+	public GUIStyle estilo;
 
 	void Start () 
 	{
@@ -18,17 +20,25 @@ public class Controles : MonoBehaviour
 	{
 		if (fisicasPersonaje && tieneControl)
 		{
-			if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+			if (Input.GetKey(KeyCode.RightShift))
 				fisicasPersonaje.EmpiezaSprint();
 
-			if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+			if (Input.GetKeyUp(KeyCode.RightShift))
 				fisicasPersonaje.AcabaSprint();
 
-			if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+			if (Input.GetKeyDown(KeyCode.DownArrow))
 				fisicasPersonaje.Agacharse();
 
-			if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
+			if (Input.GetKeyUp(KeyCode.DownArrow))
 				fisicasPersonaje.DejaAgacharse();
+			
+			if (Input.GetKeyDown(KeyCode.P))
+				pause();
+			
+			if (Input.GetKeyUp(KeyCode.R))
+				Application.LoadLevel("prueba");
+        
+			
 		}
 	}
 
@@ -36,12 +46,35 @@ public class Controles : MonoBehaviour
 	{
 		if (fisicasPersonaje && tieneControl)
 		{
-			if (Input.GetButton("Jump"))
+			if (Input.GetButton("Fire2"))
 				fisicasPersonaje.Salto();
 
 			fisicasPersonaje.Andar(Input.GetAxisRaw("Horizontal"));
 		}
 	}
+	
+	void pause(){
+		if(!pausa){
+			Time.timeScale = 0;
+			pausa = true;
+		}else{
+			Time.timeScale = 1;
+			pausa = false;
+		}
+	}
+	
+	void OnGUI(){
+		if(pausa){
+				GUI.Label(new Rect(Screen.height + 250,0,100,30),"MENU PAUSA",estilo);
+				if(GUI.Button(new Rect(Screen.height + 300,20,100,30),"Continuar",estilo)){
+					Time.timeScale = 1.0f;
+					pausa = false;
+				}
+				if(GUI.Button(new Rect(Screen.height + 300,40,100,30),"Salir",estilo)){
+					Application.LoadLevel("MainMenu");
+				}
+		}
+	}			
 
 	public void DaControl() { tieneControl = true; }
 	public void QuitaControl() { tieneControl = false; }

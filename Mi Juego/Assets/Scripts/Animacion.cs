@@ -7,6 +7,9 @@ public class Animacion : MonoBehaviour
 	bool PersonajeMuerto = false;
     bool mIdle = false;
 
+	public AudioClip sonidoSalto;
+	public AudioClip sonidoMuerte;
+
 	void Start () 
 	{
 		if (animacionPersonaje == null)
@@ -33,10 +36,11 @@ public class Animacion : MonoBehaviour
 		if (animacionPersonaje.animation["accionCamino"] == null ||
 			animacionPersonaje.animation["accionSalta"] == null ||
 			animacionPersonaje.animation["accionAgache"] == null ||
-			//animacionPersonaje.animation["slideout"] == null ||
-			//animacionPersonaje.animation["death"] == null ||
+			animacionPersonaje.animation["accionMuerte"] == null ||
 			animacionPersonaje.animation["accionAgarre"] == null ||
 			animacionPersonaje.animation["accionCorrer"] == null ||
+			animacionPersonaje.animation["accionPIzq"] == null ||
+			animacionPersonaje.animation["accionPDer"] == null ||
 			animacionPersonaje.animation["accionIdle"] == null) return false;
 
 		return true;
@@ -59,6 +63,8 @@ public class Animacion : MonoBehaviour
 		{
             mIdle = false;
 			animacionPersonaje.animation.CrossFade("accionCamino");
+			
+			
 		}
 	}
 
@@ -84,13 +90,14 @@ public class Animacion : MonoBehaviour
 		animacionPersonaje.transform.localScale = localScale;
 	}
 
-	public void PlayerDied()
+	public void Muere()
 	{
-        PlayAnim("death");
+        PlayAnim("accionMuerte");
+		audio.PlayOneShot(sonidoMuerte);
 		PersonajeMuerto = true;
 	}
 
-	public void PlayerLives()
+	public void Vive()
 	{
 		MueveDerecha();
 		PersonajeMuerto = false;
@@ -102,11 +109,13 @@ public class Animacion : MonoBehaviour
 	void AnimacionSalto()
 	{
         PlayAnim("accionSalta");
+		audio.PlayOneShot(sonidoSalto);
 	}
 
 	void AnimacionSaltoMuro()
 	{
         PlayAnim("accionSalta");
+		audio.PlayOneShot(sonidoSalto);
 	}
 
 	void EmpiezaAgacharse()
@@ -165,4 +174,5 @@ public class Animacion : MonoBehaviour
 	{
 		PlayAnim("accionCamino");
 	}
+	
 }

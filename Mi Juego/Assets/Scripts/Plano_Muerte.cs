@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+
+
 public class Plano_Muerte : MonoBehaviour 
 {
+
 	void OnTriggerEnter(Collider other)
 	{
 		Controles control = other.gameObject.GetComponent<Controles>();
@@ -17,11 +20,17 @@ public class Plano_Muerte : MonoBehaviour
 
 	IEnumerator Personaje_Muere(GameObject jugador)
 	{
+		jugador.GetComponent<Animacion>().Muere();
 		jugador.GetComponent<Controles>().QuitaControl();
+		jugador.GetComponent<Fisicas>().QuitaVida();
+		jugador.GetComponent<Ataque>().QuitaControl();
 
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1.0f);
 
 		jugador.GetComponent<Fisicas>().Reset();
+		jugador.GetComponent<Animacion>().Vive();
 		jugador.GetComponent<Controles>().DaControl();
+		jugador.GetComponent<Ataque>().DaControl();
 	}
+	
 }
